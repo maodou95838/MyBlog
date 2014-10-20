@@ -1,8 +1,9 @@
+<%@ page language="java" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>西安国际学校教务系统</title>
+<title>脦梅掳虏鹿煤录脢脩搂脨拢陆脤脦帽脧碌脥鲁</title>
 <style type="text/css">
 <!--
 body {
@@ -41,25 +42,25 @@ body {
     </table></td>
     <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td width="31%" height="35" class="login-text02">用户名称：<br /></td>
+        <td width="31%" height="35" class="login-text02">脫脙禄搂脙没鲁脝拢潞<br /></td>
         <td width="69%"><input name="textfield" type="text" size="30" value="admin"/></td>
       </tr>
       <tr>
-        <td height="35" class="login-text02">密　码：<br /></td>
-        <td><input name="textfield2" type="password" size="30" value=”********"/></td>
+        <td height="35" class="login-text02">脙脺隆隆脗毛拢潞<br /></td>
+        <td><input name="textfield2" type="password" size="30" value=隆卤********"/></td>
       </tr>
       <tr>
-        <td height="30" class="login-text02">验证图片：<br /></td>
-        <td><img src="images/pic05.gif" width="109" height="35" /> <a href="#" class="login-text03">看不清楚，换张图片</a></td>
+        <td height="30" class="login-text02">脩茅脰陇脥录脝卢拢潞<br /></td>
+        <td><img src="images/pic05.gif" width="109" height="35" /> <a href="#" class="login-text03">驴麓虏禄脟氓鲁镁拢卢禄禄脮脜脥录脝卢</a></td>
       </tr>
       <tr>
-        <td height="35" class="login-text02">请输入验证码：</td>
+        <td height="35" class="login-text02">脟毛脢盲脠毛脩茅脰陇脗毛拢潞</td>
         <td><input name="textfield3" type="text" size="30" style="width:45%"/></td>
       </tr>
       <tr>
         <td height="35">&nbsp;</td>
-        <td><input name="Submit2" type="submit" class="right-button01" value="登 录" onClick="window.location='index.html'" />
-          <input name="Submit232" type="submit" class="right-button01" value="重 置" /></td>
+        <td><input name="Submit2" type="submit" class="right-button01" value="碌脟 脗录" onClick="window.location='index.html'" />
+          <input name="Submit232" type="submit" class="right-button01" value="脰脴 脰脙" /></td>
       </tr>
     </table></td>
   </tr>
