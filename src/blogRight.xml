@@ -5,17 +5,17 @@
 
 <struts>
 	<!-- login action -->
-<!-- 	<package name="login" extends="struts-default"> -->
-<!-- 		<action name="login" class="cn.joymates.jxc.action.login.LoginAction" > -->
-<!--             <result type="redirect">/index.jsp</result> -->
-<!--             <result name="fail">/login.jsp</result> -->
-<!--         </action> -->
+	<package name="login" extends="struts-default">
+		<action name="login" class="cn.joymates.blog.action.right.UserAction" method="login">
+            <result >/index.jsp</result>
+            <result name="fail">/login.jsp</result>
+        </action>
         
 <!--         <action name="logout" class="cn.joymates.jxc.action.login.LoginAction" method="logout"> -->
 <!--         	<result name="logout" type="redirect">/login.jsp</result> -->
 <!--         </action> -->
 
-<!-- 	</package> -->
+	</package>
 	
 <!--     <package name="basic" namespace="/admin/basic" extends="struts-default"> -->
         <!-- 角色管理 -->

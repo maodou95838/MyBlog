@@ -1,4 +1,4 @@
-package cn.joymates.blog.utils;
+package cn.joymates.blog.utils.db;
 
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
@@ -9,7 +9,6 @@ import java.lang.reflect.Method;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;

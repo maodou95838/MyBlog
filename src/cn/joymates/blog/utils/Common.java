@@ -1,6 +1,7 @@
 package cn.joymates.blog.utils;
 import java.lang.reflect.Method;
 
+@Deprecated
 public class Common {
 	/**
 	 * 判断是否存在此方法

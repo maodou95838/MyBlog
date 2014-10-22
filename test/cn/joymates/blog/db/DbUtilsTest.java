@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import org.junit.Test;
 import org.logicalcobwebs.proxool.ProxoolFacade;
 
+import cn.joymates.blog.utils.db.DbUtils;
+
 public class DbUtilsTest {
 
 	@Test

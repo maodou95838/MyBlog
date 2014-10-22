@@ -1,6 +1,5 @@
 package cn.joymates.blog.dao.impl;
 
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,9 +12,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import cn.joymates.blog.dao.BaseDAO;
-import cn.joymates.blog.db.DbUtils;
 import cn.joymates.blog.domain.base.BaseVO;
-import cn.joymates.blog.utils.Bean2SqlUtils;
+import cn.joymates.blog.utils.db.Bean2SqlUtils;
+import cn.joymates.blog.utils.db.DbUtils;
 
 
 public class BaseDAOImpl<T extends BaseVO> implements BaseDAO<T> {
@@ -272,4 +271,5 @@ public class BaseDAOImpl<T extends BaseVO> implements BaseDAO<T> {
 		}
 		return pk;
 	}
+	
 }

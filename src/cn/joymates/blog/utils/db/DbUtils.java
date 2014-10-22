@@ -1,4 +1,4 @@
-package cn.joymates.blog.db;
+package cn.joymates.blog.utils.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -130,6 +130,14 @@ public class DbUtils {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	/**
+	 * 其他方式获取Connection, 直接设置
+	 * @param conn
+	 */
+	public static void setConnection(Connection conn) {
+		threadLocal.set(conn);
 	}
 	
 }

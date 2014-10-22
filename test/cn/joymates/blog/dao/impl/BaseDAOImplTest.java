@@ -16,7 +16,7 @@ public class BaseDAOImplTest {
 		User u = new User();
 		u.setCreatePerson("stars");
 		u.setCreateTime(new Date());
-		u.setUuid("B6C98F0D327A4BCCB5D063C0269ABDD2");
+		u.setUserId("B6C98F0D327A4BCCB5D063C0269ABDD2");
 		u.setUserId("userId");;
 		u.setPassword1("123123");
 		
@@ -30,7 +30,7 @@ public class BaseDAOImplTest {
 		User u = new User();
 		u.setCreatePerson("stars");
 		u.setCreateTime(new Date());
-		u.setUuid(UUIDGenerator.getUUID());
+		u.setUserId(UUIDGenerator.getUUID());
 		u.setUserId("userId");;
 		u.setPassword1("123123");
 		

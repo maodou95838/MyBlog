@@ -8,8 +8,10 @@ import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.ibatis.session.SqlSession;
 
-import cn.joymates.blog.db.DbUtils;
+import cn.joymates.blog.utils.db.DbUtils;
+import cn.joymates.blog.utils.db.SessionFactoryUtil;
 
 /**
  * Blog服务代理工厂
@@ -18,35 +20,32 @@ import cn.joymates.blog.db.DbUtils;
  *
  */
 public class ServiceProxyFactory {
+	
+	/**
+	 * 由mybatis获取数据库连接的代理
+	 * @param target
+	 * @return
+	 */
     public static <T> T getInstance(T target) {  
-    	String packageName = target.getClass().getPackage().getName();
-    	
-    	if (StringUtils.isEmpty(packageName) || 
-    			"service".equals(StringUtils.substringAfterLast(packageName, "."))) {
-    		return null;
-    	}
-    	
-        Enhancer enhancer = new Enhancer();  
-        enhancer.setSuperclass(target.getClass());  
+    	Enhancer enhancer = preCondition(target);  
         
         enhancer.setCallback(new MethodInterceptor() {
 			@Override
 			public Object intercept(Object obj, Method method, Object[] args,
 					MethodProxy mProxy) throws Throwable {
 				Object retObj = null;
-				Connection conn = null;
+				SqlSession sess = SessionFactoryUtil.getSession();
+				
 				try {
-					conn = DbUtils.getConnection();
-					conn.setAutoCommit(false);
-					
+					DbUtils.setConnection(sess.getConnection());
 					retObj = mProxy.invokeSuper(obj, args);
-					conn.commit();
+					sess.commit();
 					
 				} catch (Exception e) {
 					e.printStackTrace();
-					conn.rollback();
+					sess.rollback();
 				} finally {
-					DbUtils.closeConnection();
+					SessionFactoryUtil.closeSession();
 				}
 				
 				return retObj;
@@ -56,5 +55,52 @@ public class ServiceProxyFactory {
         return (T)enhancer.create();  
     }
     
-	
+    /**
+     * 直接从连接池获取连接的代理
+     * @param target
+     * @param noMybatis
+     * @return
+     */
+    public static <T> T getInstance(T target, boolean noMybatis) {  
+    	Enhancer enhancer = preCondition(target);  
+        
+        enhancer.setCallback(new MethodInterceptor() {
+			@Override
+			public Object intercept(Object obj, Method method, Object[] args,
+					MethodProxy mProxy) throws Throwable {
+				Object retObj = null;
+				Connection conn = null;
+				
+				try {
+					conn = DbUtils.getConnection();
+					conn.setAutoCommit(false);
+					retObj = mProxy.invokeSuper(obj, args);
+					conn.commit();
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+					conn.rollback();
+				} finally {
+					conn.close();
+				}
+				
+				return retObj;
+			}
+        	
+        });  
+        return (T)enhancer.create();  
+    }
+    
+    private static <T> Enhancer preCondition(T target) {
+		String packageName = target.getClass().getPackage().getName();
+    	
+    	if (StringUtils.isEmpty(packageName) || 
+    			!"service".equals(StringUtils.substringAfterLast(packageName, "."))) {
+    		return null;
+    	}
+    	
+        Enhancer enhancer = new Enhancer();  
+        enhancer.setSuperclass(target.getClass());
+		return enhancer;
+	}
 }

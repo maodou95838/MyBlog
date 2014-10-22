@@ -7,9 +7,9 @@ public abstract class BaseUser extends BaseVO {
 	public BaseUser() {
 		tablename = "tb_user1";
 
-		fieldMap.put("uuid", "uuid");
-		fieldMap.put("password1", "password1");
 		fieldMap.put("userId", "user_id");
+		fieldMap.put("password1", "password1");
+		fieldMap.put("userId", "user_login_id");
 
 		fieldMap.put("createTime", "create_time");
 		fieldMap.put("createPerson", "create_person");
@@ -23,8 +23,8 @@ public abstract class BaseUser extends BaseVO {
 		this.id = "uuid";
 	}
 
-	private String uuid;
 	private String userId;
+	private String userLoginId;
 	private String password1;
 	
 	private Date createTime;
@@ -37,20 +37,20 @@ public abstract class BaseUser extends BaseVO {
 	private String isStudent;
 	private String staffStdUuid;
 
-	public String getUuid() {
-		return uuid;
-	}
-
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
-	}
-
 	public String getUserId() {
 		return userId;
 	}
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+	public String getUserLoginId() {
+		return userLoginId;
+	}
+
+	public void setUserLoginId(String userLoginId) {
+		this.userLoginId = userLoginId;
 	}
 
 	public String getPassword1() {
