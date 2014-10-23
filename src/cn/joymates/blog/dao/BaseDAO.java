@@ -1,7 +1,7 @@
 package cn.joymates.blog.dao;
 
-import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -61,7 +61,7 @@ public interface BaseDAO<T extends BaseVO> {
 	 * @return
 	 */
 	
-	public List getEcsideList(String ec_rd,T ob,HttpServletRequest req);
+	public List<Map<String, Object>> getEcsideList(String ec_rd, T ob ,HttpServletRequest req);
 	
 	/**
 	 * 根据对象获取分页列表
@@ -71,7 +71,7 @@ public interface BaseDAO<T extends BaseVO> {
 	 * @param req  （页面request请求）
 	 * @return
 	 */	
-	public List getEcsideList(String ec_rd,T ob,String lastsql,HttpServletRequest req);
+	public List<Map<String, Object>> getEcsideList(String ec_rd, T ob, String lastsql, HttpServletRequest req);
 	
 	
 	/**
@@ -82,7 +82,7 @@ public interface BaseDAO<T extends BaseVO> {
 	 * @param req        （页面request请求）
 	 * @return
 	 */
-	public List getEcsideList(String ec_rd, String searchsql, String resultsql,HttpServletRequest req);
+	public List<Map<String, Object>> getEcsideList(String ec_rd, String searchsql, String resultsql, HttpServletRequest req);
 	
 	/**
 	 * 联合查询
@@ -94,13 +94,14 @@ public interface BaseDAO<T extends BaseVO> {
 	 * @param req		HttpServletRequest
 	 * @return
 	 */
-	public List getComplexEcsideList(String ec_rd, String selectItem, String orderItem,
+	public List<Map<String, Object>> getComplexEcsideList(String ec_rd, String selectItem, String orderItem,
 			String fromItem, String whereItem ,HttpServletRequest req);
 	
-	public List getComplexEcsideList(String ec_rd, String selectItem,
+	public List<Map<String, Object>> getComplexEcsideList(String ec_rd, String selectItem,
 			String orderItem, String fromItem, HttpServletRequest req);
 	
-	public List getEcsideListForObj(String ec_rd, List list,HttpServletRequest req);
+	@Deprecated
+	public List<Map<String, Object>> getEcsideListForObj(String ec_rd, List list, HttpServletRequest req);
 	
 	/**
 	 * ecside分页。自定义排序的字段
@@ -111,8 +112,8 @@ public interface BaseDAO<T extends BaseVO> {
 	 * @param sortField  要排序的字段
 	 * @return
 	 */
-	public List getEcsideList(String ec_rd, T ob, String lastsql,
+	@Deprecated
+	public List<Map<String, Object>> getEcsideList(String ec_rd, T ob, String lastsql,
 			HttpServletRequest req, String sortField);
 	
-//	public List<T> selectList(T ob, String lastsql, Connection conn, String... fields);
 }	

@@ -5,16 +5,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.ecside.table.limit.FilterSet;
+import org.ecside.table.limit.Limit;
+import org.ecside.table.limit.Sort;
+import org.ecside.util.RequestUtil;
 
 import cn.joymates.blog.dao.BaseDAO;
 import cn.joymates.blog.domain.base.BaseVO;
 import cn.joymates.blog.utils.db.Bean2SqlUtils;
 import cn.joymates.blog.utils.db.DbUtils;
+import cn.joymates.blog.utils.db.EcsideDataFinder;
 
 
 public class BaseDAOImpl<T extends BaseVO> implements BaseDAO<T> {
@@ -86,28 +92,27 @@ public class BaseDAOImpl<T extends BaseVO> implements BaseDAO<T> {
 		executeSql(Bean2SqlUtils.getUpdateSql(ob));
 	}
 
-	public List getEcsideList(String ec_rd, T ob, HttpServletRequest req) {
+	public List<Map<String, Object>> getEcsideList(String ec_rd, T ob, HttpServletRequest req) {
 		return getEcsideList(ec_rd, ob, "", req);
 	}
 	
-	
-	public List getEcsideList(String ec_rd, T ob, String lastsql,
+	public List<Map<String, Object>> getEcsideList(String ec_rd, T ob, String lastsql,
 			HttpServletRequest req) {
-		String fieldsql = "this_.*";
 		String sql = Bean2SqlUtils.getSelectSql(ob, lastsql);
-		String orderby = " ORDER BY this_." + ob.getFieldMap().get(ob.getId())
-				+ " DESC";
-		String searchsql = "select count(*) from (select " + fieldsql + " "
-				+ sql + ") as count"; // 查询条数
-		String resultsql = "select * from(select " + fieldsql
-				+ ",rownumber() over(" + orderby + ") as curr " + sql
-				+ ")as t where t.curr>? and t.curr<=?"; // 查询语句
-		return getEcsideList(ec_rd, searchsql, resultsql, req);
+		
+		//按id排序
+		String orderBy = " ORDER BY this_." +
+				ob.getFieldMap().get(ob.getId()) + 
+			    " DESC ";
+		
+		String countSql = sql.replace("*", " count(1) "); // 查询条数
+		String resultsql = sql + orderBy + " limit ?, ? ";// 查询语句
+		return getEcsideList(ec_rd, countSql, resultsql, req);
 	
 		
 	}
 	
-	public List getEcsideList(String ec_rd, T ob, String lastsql,
+	public List<Map<String, Object>> getEcsideList(String ec_rd, T ob, String lastsql,
 			HttpServletRequest req, String sortField) {
 		
 		String fieldsql = "this_.*";
@@ -122,40 +127,19 @@ public class BaseDAOImpl<T extends BaseVO> implements BaseDAO<T> {
 			+ " DESC";
 		}
 		
-		String searchsql = "select count(*) from (select " + fieldsql + " "
+		String countSql = "select count(*) from (select " + fieldsql + " "
 				+ sql + ") as count"; // 查询条数
 		String resultsql = "select * from(select " + fieldsql
 				+ ",rownumber() over(" + orderby + ") as curr " + sql
 				+ ")as t where t.curr>? and t.curr<=?"; // 查询语句
-		return getEcsideList(ec_rd, searchsql, resultsql, req);
+		return getEcsideList(ec_rd, countSql, resultsql, req);
 		
 	}
 
-	public List getEcsideList(String ec_rd, String searchsql, String resultsql,
+	public List<Map<String, Object>> getEcsideList(String ec_rd, String countSql, String resultsql,
 			HttpServletRequest req) {
-//		logger.debug("searchSql=" + searchsql);
-//		logger.debug("resultSql=" + resultsql);
-//		int ecRd = 12;
-//		if (ec_rd != null && !ec_rd.equals("0")) {
-//			ecRd = Integer.parseInt(ec_rd);
-//		}
-//		int totalRows = RequestUtil.getTotalRowsFromRequest(req);
-//		if (totalRows < 0) {
-//			totalRows = ecsidedao.getAllInfoNumber(searchsql);
-//		}
-//		Limit limit = RequestUtil.getLimit(req, totalRows, ecRd);
-//		int offset = 0;
-//		int[] rowStartEnd = new int[] { limit.getRowStart() + offset,
-//				limit.getRowEnd() + offset };
-//		Sort sort = limit.getSort();
-//		Map sortValueMap = sort.getSortValueMap(); 
-//		FilterSet filterSet = limit.getFilterSet();
-//		Map filterPropertyMap = filterSet.getPropertyValueMap();
-//		List rslist = ecsidedao.getInfomation(rowStartEnd[0], rowStartEnd[1],
-//				sortValueMap, filterPropertyMap, resultsql);
-		return null;
+		return (EcsideDataFinder.getEcsideList(ec_rd, countSql, resultsql, req));
 	}
-
 	
 	/**
 	 * songhao---新增

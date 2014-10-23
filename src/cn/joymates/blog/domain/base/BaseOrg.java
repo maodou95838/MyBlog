@@ -10,6 +10,9 @@ public class BaseOrg extends BaseVO {
 		fieldMap.put("desc1", "desc1");
 
 		fieldMap.put("parentUuid", "parent_uuid");
+		fieldMap.put("isLogout", "is_logout");
+		fieldMap.put("logoutReason", "logout_reason");
+		
 		fieldMap.put("remark", "remark");
 		fieldMap.put("remark1", "remark1");
 		fieldMap.put("remark2", "remark2");
@@ -20,7 +23,10 @@ public class BaseOrg extends BaseVO {
 	private Integer uuid;
 	private String name;
 	private String desc1;
+	
 	private Integer parentUuid;
+	private String isLogout;
+	private String logoutReason;
 
 	private String remark;
 	private String remark1;
@@ -82,4 +88,21 @@ public class BaseOrg extends BaseVO {
 		this.remark2 = remark2;
 	}
 
+	public String getIsLogout() {
+		return isLogout;
+	}
+
+	public void setIsLogout(String isLogout) {
+		this.isLogout = isLogout;
+	}
+
+	public String getLogoutReason() {
+		return logoutReason;
+	}
+
+	public void setLogoutReason(String logoutReason) {
+		this.logoutReason = logoutReason;
+	}
+
+	
 }

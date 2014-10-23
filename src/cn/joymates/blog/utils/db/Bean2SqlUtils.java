@@ -6,7 +6,9 @@ import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -122,7 +124,7 @@ public class Bean2SqlUtils {
 		return sql + wherePart.toString();
 	}
 	
-	public static <T extends BaseVO> Map<String, String> getValueMap(T t) {
+	private static <T extends BaseVO> Map<String, String> getValueMap(T t) {
 		Map<String, String> valueMap = new HashMap<>();
 		
 		try {
@@ -213,6 +215,53 @@ public class Bean2SqlUtils {
 		}
 		
 		return list;
+	}
+	
+	/**
+	 * 根据查询结果，获取查询列名
+	 * @param rs
+	 * @return
+	 * @throws SQLException
+	 */
+	public static List<String> getColumnName(ResultSet rs) throws SQLException {
+		ResultSetMetaData metaData = rs.getMetaData();
+		int cols = metaData.getColumnCount();
+		List<String> columnName = new ArrayList<>(cols);
+		
+		for (int i=0; i<cols; i++){
+			columnName.add(metaData.getColumnName(i+1).toUpperCase()) ;
+		}
+		return columnName;
+	}
+	
+	/**
+	 * 组装结果集List<Map<String, Object>>
+	 * @param rs
+	 * @param columnName
+	 * @param map
+	 * @throws SQLException
+	 */
+	public static void buildRecord(ResultSet rs, String[] columnName, 
+			Map<String, Object> map) throws SQLException {
+		
+		for (int i=0; i<columnName.length; i++){
+			Object result = null;
+			
+			if (rs.getString(columnName[i]) != null) {
+				String type = rs.getMetaData().getColumnTypeName(i + 1);
+				
+				if (type.indexOf("DECIMAL") >= 0 || type.indexOf("INT") >= 0 //为排序
+						|| type.indexOf("DOUBLE") >= 0
+						|| type.indexOf("FLOAT") >= 0) {
+					result = new BigDecimal(rs.getString(columnName[i]));
+				} else {
+					result = rs.getString(columnName[i]);
+				}
+			}
+			
+			map.put(columnName[i], result);
+			
+		}
 	}
 	
 }

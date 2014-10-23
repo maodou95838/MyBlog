@@ -13,5 +13,6 @@
 	<constant name="struts.action.excludePattern" value="/dwr.*"/>  
 	
     <include file="blogRight.xml"/>
+    <include file="blogOrg.xml"/>
 
 </struts>

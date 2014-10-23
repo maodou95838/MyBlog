@@ -34,7 +34,8 @@
 		<servlet-name>Admin</servlet-name>
 		<url-pattern>/admin</url-pattern>
 	</servlet-mapping>
-
+	
+	<!-- validate code -->
 	<servlet>
 		<servlet-name>ImageServlet</servlet-name>
 		<servlet-class>cn.joymates.blog.servlet.ImageServlet</servlet-class>
@@ -43,6 +44,28 @@
 		<servlet-name>ImageServlet</servlet-name>
 		<url-pattern>/admin/imageServlet</url-pattern>
 	</servlet-mapping>
+	
+	<!-- ecside -->
+	<filter>
+		<filter-name>ecsideExport</filter-name>
+		<filter-class>org.ecside.filter.ECSideFilter</filter-class>
+		<init-param>
+			<param-name>useEasyDataAccess</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>useEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>ecsideExport</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
 	<display-name>Blog</display-name>
 	<welcome-file-list>

@@ -61,7 +61,7 @@ public class ServiceProxyFactory {
      * @param noMybatis
      * @return
      */
-    public static <T> T getInstance(T target, boolean noMybatis) {  
+    public static <T> T getInstanceNoMybatis(T target) {  
     	Enhancer enhancer = preCondition(target);  
         
         enhancer.setCallback(new MethodInterceptor() {

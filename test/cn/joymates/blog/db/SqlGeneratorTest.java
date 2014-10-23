@@ -89,8 +89,8 @@ public class SqlGeneratorTest {
 		u.setUserId("userId");;
 		u.setPassword1("123123");
 		
-		Map<String, String> map = Bean2SqlUtils.getValueMap(u);
-		System.out.println(map);
+//		Map<String, String> map = Bean2SqlUtils.getValueMap(u);
+//		System.out.println(map);
 		
 	}
 

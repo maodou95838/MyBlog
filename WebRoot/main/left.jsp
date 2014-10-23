@@ -87,7 +87,7 @@ body {
 										<a href="javascript:" target="mainFrame" class="left-font03" onclick="list('${status.index}');" >${key.resourceDesc}</a>
 									</s:if>
 									<s:else>
-										<a href="${key.resourceUrl}" target="mainFrame" class="left-font03" ">${key.resourceDesc}</a>
+										<a href="${pageContext.request.contextPath}/${key.resourceUrl}" target="mainFrame" class="left-font03" ">${key.resourceDesc}</a>
 									</s:else>
 								</td>
 							</tr>
@@ -103,7 +103,7 @@ body {
 				<s:iterator value="#root.value" status="status2">
 					<tr>
 					  <td width="9%" height="20" ><img name="xiaotuName" id="xiaotu${status.index}${status2.index}" src="${pageContext.request.contextPath}/images/ico06.gif" width="8" height="12" /></td>
-					  <td width="91%"><a href="${resourceUrl}" target="mainFrame" class="left-font03" onclick="tupian('${status.index}${status2.index}');">${resourceDesc}</a></td>
+					  <td width="91%"><a href="${pageContext.request.contextPath}/${resourceUrl}" target="mainFrame" class="left-font03" onclick="tupian('${status.index}${status2.index}');">${resourceDesc}</a></td>
 					</tr>
 				</s:iterator>
       	</table>
