@@ -27,7 +27,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
     		rs.resource_url resourceUrl,
     	    rs.resource_order resourceOrder, 
     	    rs.parent_id parentId,
-    	    rs.resource_remark resourceRemark,
+    	    rs.resource_desc resourceDesc,
     	    rs.resource_title resourceTitle
 		FROM 
 			tb_user_role ur, tb_role r ,tb_role_privilege rp, tb_resource rs

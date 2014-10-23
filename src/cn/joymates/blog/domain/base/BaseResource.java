@@ -7,8 +7,9 @@ public class BaseResource extends BaseVO {
 
 		fieldMap.put("resourceId", "resource_id");
 		fieldMap.put("resourceUrl", "resource_url");
+		fieldMap.put("resourceDesc", "resource_desc");
+		
 		fieldMap.put("resourceOrder", "resource_order");
-
 		fieldMap.put("parentId", "parent_id");
 		fieldMap.put("parentTitle", "parent_title");
 		fieldMap.put("resourceRemark", "resource_remark");
@@ -20,9 +21,12 @@ public class BaseResource extends BaseVO {
 //	
 	private String resourceId;
 	private String resourceUrl;
+	private String resourceDesc;
+	
 	private String resourceOrder;
 	private String parentId;
 	private String parentTitle;
+	
 	private String resourceRemark;
 	private String resourceTitle;
 	
@@ -67,6 +71,12 @@ public class BaseResource extends BaseVO {
 	}
 	public void setResourceTitle(String resourceTitle) {
 		this.resourceTitle = resourceTitle;
+	}
+	public String getResourceDesc() {
+		return resourceDesc;
+	}
+	public void setResourceDesc(String resourceDesc) {
+		this.resourceDesc = resourceDesc;
 	}
 	
 }
