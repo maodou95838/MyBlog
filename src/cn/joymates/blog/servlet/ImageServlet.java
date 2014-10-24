@@ -6,6 +6,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.lang3.StringUtils;
 
 import cn.joymates.blog.utils.RandomValidateCode;
 
@@ -21,18 +24,31 @@ public class ImageServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        response.setContentType("image/jpeg");//设置相应类型,告诉浏览器输出的内容为图片
-        response.setHeader("Pragma", "No-cache");//设置响应头信息，告诉浏览器不要缓存此内容
-        response.setHeader("Cache-Control", "no-cache");
-        response.setDateHeader("Expire", 0);
+    	RandomValidateCode rvc = new RandomValidateCode();
+    	HttpSession session = request.getSession();
+    	final String V_CODE = "validateCode";
+    	
+    	String code = (session.getAttribute(V_CODE) == null ? "" : session.getAttribute(V_CODE).toString());
+    	if (StringUtils.isEmpty(code)) {
+    		code = rvc.generateVCode();
+    		session.setAttribute(V_CODE, code);
+    		request.getRequestDispatcher("/main/login2.jsp").forward(request, response);
+    		
+    	} else {
+    		response.setContentType("image/jpeg");//输出的内容为图片
+    		response.setHeader("Pragma", "No-cache");//不要缓存此内容
+    		response.setHeader("Cache-Control", "no-cache");
+    		response.setDateHeader("Expire", 0);
+    		
+    		try {
+                rvc.getRandcode(code, response);//输出图片方法
+                session.removeAttribute(V_CODE);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+    	}
         
-        RandomValidateCode randomValidateCode = new RandomValidateCode();
-        try {
-            randomValidateCode.getRandcode(request, response);//输出图片方法
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)

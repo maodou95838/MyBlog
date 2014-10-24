@@ -112,6 +112,7 @@ public class BaseDAOImpl<T extends BaseVO> implements BaseDAO<T> {
 		
 	}
 	
+	@Deprecated
 	public List<Map<String, Object>> getEcsideList(String ec_rd, T ob, String lastsql,
 			HttpServletRequest req, String sortField) {
 		

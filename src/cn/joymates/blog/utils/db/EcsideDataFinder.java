@@ -3,14 +3,16 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.ecside.easydataaccess.ConnectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.ecside.table.limit.FilterSet;
 import org.ecside.table.limit.Limit;
 import org.ecside.table.limit.Sort;
@@ -31,14 +33,13 @@ public final class EcsideDataFinder {
 	 * @param countSql
 	 * @return number
 	 */
-	private static int getResultCount(String countSql) {
-		Connection conn = null;
+	private static int getResultCount(String countSql) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rest = null;
 		int number = -1;
 		
 		try {
-			conn = DbUtils.getConnection();
+			Connection conn = DbUtils.getConnection();
 //			pstmt = ConnectionUtils.prepareStatement(conn, countSql);
 			pstmt = conn.prepareStatement(countSql);
 			rest = pstmt.executeQuery();
@@ -47,9 +48,8 @@ public final class EcsideDataFinder {
 				number=rest.getInt(1);
 			}
 			
-		} catch (Exception e) {
-			e.printStackTrace();
-			number=-1;
+		} catch (SQLException e) {
+			throw e;
 		} finally {
 			DbUtils.closeResultset(rest);
 			DbUtils.closeStatement(pstmt);
@@ -65,17 +65,16 @@ public final class EcsideDataFinder {
 	 * return list
 	 */
 	private static List<Map<String, Object>> getResult(int startRow, int endRow, 
-			Map sortValueMap, Map filterPropertyMap, String resultSql){
+			Map sortValueMap, Map filterPropertyMap, String resultSql) throws SQLException {
 		int size = endRow - startRow;
 		
-		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rest = null;
 		List<Map<String, Object>> list = null;
 		
 		try {
 			int end = size + startRow;
-			conn = DbUtils.getConnection();
+			Connection conn = DbUtils.getConnection();
 			
 //			pstmt = ConnectionUtils.prepareStatement(conn, resultSql);
 			pstmt = conn.prepareStatement(resultSql);
@@ -91,8 +90,8 @@ public final class EcsideDataFinder {
 				Bean2SqlUtils.buildRecord(rest, columnName.toArray(new String[columnName.size()]), info);
 				list.add(info);
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (SQLException e) {
+			throw e;
 		} finally {
 			DbUtils.closeResultset(rest);
 			DbUtils.closeStatement(pstmt);
@@ -108,27 +107,34 @@ public final class EcsideDataFinder {
 	 * @param req ： httpServletRequest
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public static List<Map<String, Object>> getEcsideList(String ec_rd, String countSql, String resultsql,
 			HttpServletRequest req) {
 		//default page size
 		int ecRd = 12;
-		if (ec_rd != null && !ec_rd.equals("0")) {
+		if (StringUtils.isNotEmpty(ec_rd)) {
 			ecRd = Integer.parseInt(ec_rd);
 		}
 		
 		//get count
 		int totalRows = RequestUtil.getTotalRowsFromRequest(req);
-		totalRows = totalRows < 0 ? getResultCount(countSql) : totalRows;
+		try {
+			totalRows = totalRows < 0 ? getResultCount(countSql) : totalRows;
+			
+			Limit limit = RequestUtil.getLimit(req, totalRows, ecRd);
+			int[] rowStartEnd = new int[] {limit.getRowStart(), limit.getRowEnd()};
+			Sort sort = limit.getSort();
+			
+			Map sortValueMap = sort.getSortValueMap(); 
+			FilterSet filterSet = limit.getFilterSet();
+			Map filterPropertyMap = filterSet.getPropertyValueMap();
+			
+			return (getResult(rowStartEnd[0], rowStartEnd[1],
+					sortValueMap, filterPropertyMap, resultsql));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
-		Limit limit = RequestUtil.getLimit(req, totalRows, ecRd);
-		int[] rowStartEnd = new int[] {limit.getRowStart(), limit.getRowEnd()};
-		Sort sort = limit.getSort();
-		
-		Map sortValueMap = sort.getSortValueMap(); 
-		FilterSet filterSet = limit.getFilterSet();
-		Map filterPropertyMap = filterSet.getPropertyValueMap();
-		
-		return (getResult(rowStartEnd[0], rowStartEnd[1],
-				sortValueMap, filterPropertyMap, resultsql));
+		return Collections.EMPTY_LIST;
 	}
 }
