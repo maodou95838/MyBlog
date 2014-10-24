@@ -81,7 +81,7 @@ public class ServiceProxyFactory {
 					e.printStackTrace();
 					conn.rollback();
 				} finally {
-					conn.close();
+					DbUtils.closeConnection();
 				}
 				
 				return retObj;
