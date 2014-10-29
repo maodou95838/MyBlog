@@ -75,8 +75,8 @@ public final class EcsideDataFinder {
 		try {
 			int end = size + startRow;
 			Connection conn = DbUtils.getConnection();
-			
 //			pstmt = ConnectionUtils.prepareStatement(conn, resultSql);
+			
 			pstmt = conn.prepareStatement(resultSql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, end);

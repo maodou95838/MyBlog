@@ -9,7 +9,7 @@ import cn.joymates.blog.domain.Resource;
 import cn.joymates.blog.domain.User;
 import cn.joymates.blog.utils.db.SessionFactoryUtil;
 
-public class UserDaoImpl extends BaseDAOImpl<User> implements IUserDao {
+public class UserDaoImpl extends BaseDaoImpl<User> implements IUserDao {
 	
 	public User findByUserId(User user) {
 		SqlSession sess = SessionFactoryUtil.getSession();

@@ -6,15 +6,32 @@ import java.util.Map;
 import cn.joymates.blog.domain.base.BaseUser;
 
 public class User extends BaseUser {
-	private Map<String, List<Resource>> resourceMap;
+	/**
+	 * 资源类型
+	 */
+	private String resourceType;
+	
+	/**
+	 * 功能树map
+	 */
+	private Map<Resource, List<Resource>> funcTreeMap;
 
-	public Map<String, List<Resource>> getResourceMap() {
-		return resourceMap;
+	public Map<Resource, List<Resource>> getFuncTreeMap() {
+		return funcTreeMap;
 	}
 
-	public void setResourceMap(Map<String, List<Resource>> resourceMap) {
-		this.resourceMap = resourceMap;
+	public void setFuncTreeMap(Map<Resource, List<Resource>> funcTreeMap) {
+		this.funcTreeMap = funcTreeMap;
 	}
+
+	public String getResourceType() {
+		return resourceType;
+	}
+
+	public void setResourceType(String resourceType) {
+		this.resourceType = resourceType;
+	}
+
 	
 	
 }

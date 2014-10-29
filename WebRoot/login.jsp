@@ -1,1 +1,1 @@
-<jsp:forward page="/admin/imageServlet"/>
+<jsp:forward page="/imageServlet"/>

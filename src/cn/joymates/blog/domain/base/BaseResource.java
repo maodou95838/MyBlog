@@ -15,6 +15,8 @@ public class BaseResource extends BaseVO {
 		fieldMap.put("resourceRemark", "resource_remark");
 		
 		fieldMap.put("resourceTitle", "resource_title");
+		fieldMap.put("resourceType", "resource_type");
+		fieldMap.put("inPageName", "in_page_name");
 
 		this.id = "resource_id";
 	}
@@ -29,6 +31,9 @@ public class BaseResource extends BaseVO {
 	
 	private String resourceRemark;
 	private String resourceTitle;
+	
+	private String resourceType;
+	private String inPageName;
 	
 	public String getResourceId() {
 		return resourceId;
@@ -77,6 +82,18 @@ public class BaseResource extends BaseVO {
 	}
 	public void setResourceDesc(String resourceDesc) {
 		this.resourceDesc = resourceDesc;
+	}
+	public String getResourceType() {
+		return resourceType;
+	}
+	public void setResourceType(String resourceType) {
+		this.resourceType = resourceType;
+	}
+	public String getInPageName() {
+		return inPageName;
+	}
+	public void setInPageName(String inPageName) {
+		this.inPageName = inPageName;
 	}
 	
 }

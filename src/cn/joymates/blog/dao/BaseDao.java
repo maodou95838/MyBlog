@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import cn.joymates.blog.domain.base.BaseVO;
 
 
-public interface BaseDAO<T extends BaseVO> {
+public interface BaseDao<T extends BaseVO> {
 	
 	/**
 	 * 根据对象查询
@@ -61,7 +61,7 @@ public interface BaseDAO<T extends BaseVO> {
 	 * @return
 	 */
 	
-	public List<Map<String, Object>> getEcsideList(String ec_rd, T ob ,HttpServletRequest req);
+	public List<Map<String, Object>> getEcsideList(String ec_rd, T ob,HttpServletRequest req);
 	
 	/**
 	 * 根据对象获取分页列表

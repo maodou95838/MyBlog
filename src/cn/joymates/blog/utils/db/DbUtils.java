@@ -66,6 +66,7 @@ public class DbUtils {
 			try {
 				Class.forName("org.logicalcobwebs.proxool.ProxoolDriver");
 				conn = DriverManager.getConnection("proxool.MySql5:com.mysql.jdbc.Driver:jdbc:mysql://localhost:3309/Blog", "root", "root");
+				threadLocal.set(conn);
 			} catch (ClassNotFoundException e) {
 				logger.error("数据库连接池驱动未找到！");
 			} catch (SQLException e) {
@@ -89,6 +90,7 @@ public class DbUtils {
 			try {
 				Class.forName("org.logicalcobwebs.proxool.ProxoolDriver");
 				conn = DriverManager.getConnection("proxool.MySql5");
+				threadLocal.set(conn);
 			} catch (ClassNotFoundException e) {
 				logger.error("数据库连接池驱动未找到！");
 			} catch (SQLException e) {
@@ -101,7 +103,7 @@ public class DbUtils {
 	
 	public static void closeConnection() {
 		Connection conn  = threadLocal.get();
-		threadLocal.set(null);
+		threadLocal.remove();
 		
 		if(conn != null){
 			try {
@@ -110,6 +112,7 @@ public class DbUtils {
 				e.printStackTrace();
 			}
 		}
+		
 	}
 	
 	public static void closeStatement(Statement st) {
@@ -138,6 +141,10 @@ public class DbUtils {
 	 */
 	public static void setConnection(Connection conn) {
 		threadLocal.set(conn);
+	}
+	
+	public static void removeConnection() {
+		threadLocal.remove();
 	}
 	
 }

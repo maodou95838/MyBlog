@@ -21,6 +21,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
   	</select>
   	
   	<!-- loading function tree -->
+  	<!-- loading function point, otherwise -->
 	<select id="searchResourceByUserId" parameterType="User" resultType="Resource">
     	SELECT 
     		rs.resource_id resourceId, 
@@ -28,14 +29,24 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
     	    rs.resource_order resourceOrder, 
     	    rs.parent_id parentId,
     	    rs.resource_desc resourceDesc,
-    	    rs.resource_title resourceTitle
+    	    rs.resource_title resourceTitle,
+    	    rs.resource_type resourceType,
+    	    rs.in_page_name inPageName
 		FROM 
 			tb_user_role ur, tb_role r ,tb_role_privilege rp, tb_resource rs
 		WHERE 
 			ur.role_id = r.role_id and
 		    r.role_id = rp.role_id and
 		    rp.resource_id = rs.resource_id and 
-		    ur.user_id = #{userId} 
+		    ur.user_id = #{userId} and
+		    <choose>
+		    <when test="resourceType == 1">
+		    	rs.resource_type = '1'
+		    </when>
+		    <when test="resourceType != 1">
+		    	rs.resource_type != '1' and rs.parent_id = #{resourceType}
+		    </when>
+		    </choose>
 		ORDER BY 
 			rs.resource_id
         		

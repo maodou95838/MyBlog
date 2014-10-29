@@ -19,13 +19,25 @@ public class UserService {
 		//
 	}
 	
-	public Map<Resource, List<Resource>> login(User user) {
+	
+	public User login(User user) {
 		user = dao.findByUserId(user);
 		if (user == null) {
 			return null;
 		}
 		
-		return boxing(dao.searchResourceUserId(user));
+		user.setResourceType(Resource.TREE);
+		user.setFuncTreeMap(boxing(dao.searchResourceUserId(user)));
+		return user;
+	}
+	
+	/**
+	 * 查找用户对应功能点
+	 * @param user
+	 * @return
+	 */
+	public List<Resource> getFuncResource(User user) {
+		return dao.searchResourceUserId(user);
 	}
 	
 	private Map<Resource, List<Resource>> boxing(List<Resource> list) {

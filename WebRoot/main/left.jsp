@@ -24,7 +24,7 @@ body {
 		var imgs = document.getElementsByName("xiaotuName");
 		
 		for (var i = 0; i < imgs.length; i++) {
-			imgs[i].src = "${pageContext.request.contextPath}/images/ico06.gif"
+			imgs[i].src = "${pageContext.request.contextPath}/images/ico06.gif";
 		}
 		tp.src = "${pageContext.request.contextPath}/images/ico05.gif";
 	}
@@ -54,14 +54,14 @@ body {
 			<TD>
 				<table width="100%" border="0" cellpadding="0" cellspacing="0">
 					<tr>
-						<td width="207" height="55" background="../images/nav01.gif">
+						<td width="207" height="55" background="${pageContext.request.contextPath}/images/nav01.gif">
 							<table width="90%" border="0" align="center" cellpadding="0"
 								cellspacing="0">
 								<tr>
-									<td width="25%" rowspan="2"><img src="../images/ico02.gif"
+									<td width="25%" rowspan="2"><img src="${pageContext.request.contextPath}/images/ico02.gif"
 										width="35" height="35" /></td>
 									<td width="75%" height="22" class="left-font01">您好，<span
-										class="left-font02">${user.userLoginId}</span></td>
+										class="left-font02">${loggedUser.userLoginId}</span></td>
 								</tr>
 								<tr>
 									<td height="22" class="left-font01">[&nbsp;<a
@@ -72,7 +72,7 @@ body {
 						</td>
 					</tr>
 				</table> 
-		<s:iterator value="#session.funcTreeMap" id="root" status="status">
+		<s:iterator value="#session.loggedUser.funcTreeMap" id="root" status="status">
 		<!--主菜单-->
 		 <TABLE width="100%" border="0" cellpadding="0" cellspacing="0" class="left-table03">
 		          <tr>
@@ -87,7 +87,7 @@ body {
 										<a href="javascript:" target="mainFrame" class="left-font03" onclick="list('${status.index}');" >${key.resourceDesc}</a>
 									</s:if>
 									<s:else>
-										<a href="${pageContext.request.contextPath}/${key.resourceUrl}" target="mainFrame" class="left-font03" ">${key.resourceDesc}</a>
+										<a href="${pageContext.request.contextPath}/${key.resourceUrl}?parentId=${key.resourceId}&tree=1" target="mainFrame" class="left-font03" ">${key.resourceDesc}</a>
 									</s:else>
 								</td>
 							</tr>
@@ -103,7 +103,7 @@ body {
 				<s:iterator value="#root.value" status="status2">
 					<tr>
 					  <td width="9%" height="20" ><img name="xiaotuName" id="xiaotu${status.index}${status2.index}" src="${pageContext.request.contextPath}/images/ico06.gif" width="8" height="12" /></td>
-					  <td width="91%"><a href="${pageContext.request.contextPath}/${resourceUrl}" target="mainFrame" class="left-font03" onclick="tupian('${status.index}${status2.index}');">${resourceDesc}</a></td>
+					  <td width="91%"><a href="${pageContext.request.contextPath}/${resourceUrl}?parentId=${resourceId}tree=1" target="mainFrame" class="left-font03" onclick="tupian('${status.index}${status2.index}');">${resourceDesc}</a></td>
 					</tr>
 				</s:iterator>
       	</table>

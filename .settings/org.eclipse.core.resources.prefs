@@ -1,11 +1,12 @@
 eclipse.preferences.version=1
+encoding//WebRoot/WEB-INF/org/org_add.jsp=UTF-8
 encoding//WebRoot/WEB-INF/org/org_home.jsp=UTF-8
 encoding//WebRoot/ecside/css/ecside_style.css=UTF-8
 encoding//WebRoot/ecside1/css/ecside_style.css=UTF-8
 encoding//WebRoot/index.jsp=UTF-8
 encoding//WebRoot/js/typem.js=gbk
 encoding//WebRoot/js/xiangmu.js=gbk
-encoding//WebRoot/login.jsp=UTF-8
 encoding//WebRoot/main/left.jsp=UTF-8
+encoding//WebRoot/main/login2.jsp=UTF-8
 encoding//src/cn/joymates/blog/utils/db/DbUtils.java=UTF-8
 encoding/<project>=UTF-8

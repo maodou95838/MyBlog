@@ -4,7 +4,7 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import cn.joymates.blog.dao.BaseDAO;
+import cn.joymates.blog.dao.BaseDao;
 import cn.joymates.blog.domain.Org;
 import cn.joymates.blog.domain.User;
 import cn.joymates.blog.utils.UUIDGenerator;
@@ -20,7 +20,7 @@ public class BaseDAOImplTest {
 		u.setUserId("userId");;
 		u.setPassword1("123123");
 		
-		BaseDAO<User> dao = new BaseDAOImpl<>();
+		BaseDao<User> dao = new BaseDaoImpl<>();
 		User u1 = dao.selectOne(u);
 		System.out.println(u1);
 	}
@@ -34,7 +34,7 @@ public class BaseDAOImplTest {
 		u.setUserId("userId");;
 		u.setPassword1("123123");
 		
-		BaseDAO dao = new BaseDAOImpl();
+		BaseDao dao = new BaseDaoImpl();
 		int i = dao.save(u);
 		System.out.println(i);
 	}
@@ -48,7 +48,7 @@ public class BaseDAOImplTest {
 		
 		org.setRemark("my remark");
 		
-		BaseDAO<Org> dao = new BaseDAOImpl<>();
+		BaseDao<Org> dao = new BaseDaoImpl<>();
 		int i = dao.save(org);
 		System.out.println(i);
 	}

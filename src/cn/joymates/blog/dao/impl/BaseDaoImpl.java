@@ -12,14 +12,14 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import cn.joymates.blog.dao.BaseDAO;
+import cn.joymates.blog.dao.BaseDao;
 import cn.joymates.blog.domain.base.BaseVO;
 import cn.joymates.blog.utils.db.Bean2SqlUtils;
 import cn.joymates.blog.utils.db.DbUtils;
 import cn.joymates.blog.utils.db.EcsideDataFinder;
 
 
-public class BaseDAOImpl<T extends BaseVO> implements BaseDAO<T> {
+public class BaseDaoImpl<T extends BaseVO> implements BaseDao<T> {
 	
 	public static Log logger = LogFactory.getLog(DbUtils.class);
 

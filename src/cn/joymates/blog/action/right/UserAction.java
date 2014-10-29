@@ -1,10 +1,6 @@
 package cn.joymates.blog.action.right;
 
-import java.util.List;
-import java.util.Map;
-
 import cn.joymates.blog.action.BaseAction;
-import cn.joymates.blog.domain.Resource;
 import cn.joymates.blog.domain.User;
 import cn.joymates.blog.service.UserService;
 import cn.joymates.blog.utils.ServiceProxyFactory;
@@ -18,13 +14,13 @@ import cn.joymates.blog.utils.ServiceProxyFactory;
 public class UserAction extends BaseAction {
 	
 	public String login() {
-		Map<Resource, List<Resource>> userFuncTree = userService.login(user);
+		User u = userService.login(user);
 		
-		if (userFuncTree == null) {
+		if (u == null) {
 			return "fail";
 		}
 		
-		session.setAttribute("funcTreeMap", userFuncTree);
+		session.setAttribute("loggedUser", u);
 		return SUCCESS;
 	}
 	

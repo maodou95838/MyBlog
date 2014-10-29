@@ -8,7 +8,8 @@
 	
 		<action name="org_*" class="cn.joymates.blog.action.org.OrgAction" method="{1}">
             <result name="home">/WEB-INF/org/org_home.jsp</result>
-            <result name="fail">/login.jsp</result>
+            <result name="addUI">/WEB-INF/org/org_add.jsp</result>
+<!--             <result name="addUI">/WEB-INF/org/org_add.jsp</result> -->
         </action>
         
 

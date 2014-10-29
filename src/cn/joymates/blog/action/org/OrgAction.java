@@ -18,11 +18,36 @@ public class OrgAction extends BaseAction {
 			org = new Org();
 		}
 		
-		OrgService service = ServiceProxyFactory.getInstanceNoMybatis(new OrgService());
 		List<Map<String, Object>> orgList = service.find(ec_rd, org, req);
 		req.setAttribute("orgList", orgList);
 		return "home";
 	}
+	
+	public String showAddUI() {
+		Org org = new Org();
+		org.setIsLeaf(Org.NOT_LEAF);
+		org.setIsLogout(Org.NOT_LOGGOUT);
+		
+		List<Org> fatherOrg = service.selectList(org);
+		req.setAttribute("fatherOrg", fatherOrg);
+		return "addUI";
+	}
+	
+	public String add() {
+		int puuid = org.getParentUuid();
+		
+		if (puuid == -1) {
+			org.setIsLeaf(Org.LEAF);
+			org.setParentUuid(null);
+		} else {
+			org.setIsLeaf(Org.NOT_LEAF);
+		}
+		
+		service.save(org);
+		return "home";
+	}
+	
+	private OrgService service = ServiceProxyFactory.getInstanceNoMybatis(new OrgService());
 	
 	private Org org;
 

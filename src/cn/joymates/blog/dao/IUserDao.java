@@ -5,7 +5,7 @@ import java.util.List;
 import cn.joymates.blog.domain.Resource;
 import cn.joymates.blog.domain.User;
 
-public interface IUserDao extends BaseDAO<User> {
+public interface IUserDao extends BaseDao<User> {
 	
 	User findByUserId(User user);
 	

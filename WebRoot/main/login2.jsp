@@ -144,7 +144,7 @@ body {
 						<tr>
 							<td height="30" class="login-text02">验证图片：<br /></td>
 							<td><img
-								src="${pageContext.request.contextPath }/admin/imageServlet"
+								src="${pageContext.request.contextPath }/imageServlet"
 								width="109" height="35" onclick="javascript:history.go(0)" /> </td>
 						</tr>
 						<tr>
