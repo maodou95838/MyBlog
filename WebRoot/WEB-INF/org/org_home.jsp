@@ -106,9 +106,9 @@ html {
 				<ec:column property="IS_LOGOUT" title="是否注销" width="10%" />
 				<ec:column property="LOGOUT_REASON" title="注销原因" width="10%" />
 				<ec:column property="_00" title="操作" width="10%">
-					<a href="${pageContext.request.contextPath}/admin/basic/user_showModifyPage.html?user.userCode=${user1.USER_CODE}">修改</a>
+					<a href="${pageContext.request.contextPath}/admin/basic/user_showModifyPage.html?user.userCode=${user1.USER_CODE}" name="show_modify_ui">修改</a>
 					&nbsp;&nbsp;
-					<a href="${pageContext.request.contextPath}/admin/basic/user_showModifyPage.html?user.userCode=${user1.USER_CODE}" name="show_modify_ui">删除</a>
+					<a href="${pageContext.request.contextPath}/admin/basic/user_showModifyPage.html?user.userCode=${user1.USER_CODE}" name="del_org">删除</a>
 				</ec:column>
 			</ec:row>
 		</ec:table>
