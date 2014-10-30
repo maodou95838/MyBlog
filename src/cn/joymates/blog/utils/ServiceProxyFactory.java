@@ -33,14 +33,17 @@ public class ServiceProxyFactory {
 			@Override
 			public Object intercept(Object obj, Method method, Object[] args,
 					MethodProxy mProxy) throws Throwable {
-				if (method.getName().equals("finalize")) {
-					return mProxy.invokeSuper(obj, args);
+				Method[] methods = Object.class.getDeclaredMethods();
+				
+				for (Method m : methods) {
+					if (m.getName().equals(method.getName())) {
+						return mProxy.invokeSuper(obj, args);
+					}
 				}
 				
 				Object retObj = null;
 				SqlSession sess = SessionFactoryUtil.getSession();
 				
-				System.out.println(method.getName());
 				try {
 					DbUtils.setConnection(sess.getConnection());
 					retObj = mProxy.invokeSuper(obj, args);
@@ -76,14 +79,18 @@ public class ServiceProxyFactory {
 					MethodProxy mProxy) throws Throwable {
 				Object retObj = null;
 				Connection conn = null;
+				Method[] methods = Object.class.getDeclaredMethods();
 				
-				if (method.getName().equals("finalize")) {
-					return mProxy.invokeSuper(obj, args);
+				for (Method m : methods) {
+					if (m.getName().equals(method.getName())) {
+						return mProxy.invokeSuper(obj, args);
+					}
 				}
 				
 				try {
 					conn = DbUtils.getConnection();
 					conn.setAutoCommit(false);
+					
 					retObj = mProxy.invokeSuper(obj, args);
 					conn.commit();
 				} catch (Exception e) {

@@ -13,6 +13,7 @@ public class BaseOrg extends BaseVO {
 		fieldMap.put("isLogout", "is_logout");
 		fieldMap.put("logoutReason", "logout_reason");
 		fieldMap.put("isLeaf", "is_leaf");
+		fieldMap.put("isTerminal", "is_terminal");
 		
 		fieldMap.put("remark", "remark");
 		fieldMap.put("remark1", "remark1");
@@ -29,6 +30,7 @@ public class BaseOrg extends BaseVO {
 	private String isLogout;
 	private String logoutReason;
 	private String isLeaf;
+	private String isTerminal;
 
 	private String remark;
 	private String remark1;
@@ -112,6 +114,14 @@ public class BaseOrg extends BaseVO {
 
 	public void setIsLeaf(String isLeaf) {
 		this.isLeaf = isLeaf;
+	}
+
+	public String getIsTerminal() {
+		return isTerminal;
+	}
+
+	public void setIsTerminal(String isTerminal) {
+		this.isTerminal = isTerminal;
 	}
 
 }

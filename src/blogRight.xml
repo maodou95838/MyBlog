@@ -7,7 +7,7 @@
 	<!-- login action -->
 	<package name="login" extends="struts-default">
 		<action name="login" class="cn.joymates.blog.action.right.UserAction" method="login">
-            <result >/index.jsp</result>
+            <result >/main/index.jsp</result>
             <result name="fail">/login.jsp</result>
         </action>
         

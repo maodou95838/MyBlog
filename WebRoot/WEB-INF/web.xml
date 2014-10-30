@@ -15,6 +15,7 @@
 		<url-pattern>/admin/*</url-pattern>
 	</filter-mapping>
 	
+	<!-- function right -->
 	<filter>
 		<filter-name>functionPointFilter</filter-name>
 		<filter-class>cn.joymates.blog.filter.FunctionPointFilter</filter-class>

@@ -1,7 +1,7 @@
-<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ page language="java" pageEncoding="utf-8"%>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">	
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">	
     <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath }/css/css.css"/>
     <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath }/css/style.css"/>
     <link rel="stylesheet" type="text/css" href='${pageContext.request.contextPath}/ecside/css/ecside_style.css' />

@@ -1,29 +1,33 @@
 package cn.joymates.blog.utils;
-import java.lang.reflect.Method;
 
-@Deprecated
+import java.io.UnsupportedEncodingException;
+
+/**
+ * 常用工具类
+ * 
+ * @author Jackie Hou
+ * 
+ */
 public class Common {
-	/**
-	 * 判断是否存在此方法
-	 * 
-	 * @param clas
-	 * @param methodname
-	 * @return
-	 */
-	public static boolean isMethodDefined(Class<?> clas, String methodname, Class<?> ... parameterTypes) {
-		try {
-			Method m = clas.getMethod(methodname, parameterTypes);
-			if (m != null) {
-				return true;
-			} else {
-				return false;
+
+	public static String getEncoding(String str) {
+		String[] encodes = {"GB2312", "ISO-8859-1", "UTF-8", "GBK"};
+		String retValue = "未知";
+		
+		for (String ecd : encodes) {
+			try {
+				String temp = new String(str.getBytes(ecd), ecd);
+				if (str.equals(temp)) {
+					retValue = ecd;
+					break;
+				}
+				
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
 			}
-		} catch (SecurityException e) {
-			e.printStackTrace();
-			return false;
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
-			return false;
 		}
+		
+		return retValue;
+		
 	}
 }

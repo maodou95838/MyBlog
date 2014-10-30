@@ -103,6 +103,9 @@ public class BaseDaoImpl<T extends BaseVO> implements BaseDao<T> {
 		
 		String countSql = sql.replace("*", " count(1) "); // 查询条数
 		String resultsql = sql + orderBy + " limit ?, ? ";// 查询语句
+		
+		logger.debug(countSql);
+		logger.debug(resultsql);
 		return getEcsideList(ec_rd, countSql, resultsql, req);
 	
 		
@@ -229,6 +232,7 @@ public class BaseDaoImpl<T extends BaseVO> implements BaseDao<T> {
 	 * @return 数据库生产的pk值
 	 */
 	private int executeSql(String sql) {
+		logger.debug(sql);
 		Connection conn = null;
 		PreparedStatement prst = null;
 		ResultSet rs = null;

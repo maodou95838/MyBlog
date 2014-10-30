@@ -5,53 +5,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>组织机构首页</title>
-<style type="text/css">
-<!--
-body {
-	margin-left: 0px;
-	margin-top: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
-}
-
-.tabfont01 {
-	font-family: "宋体";
-	font-size: 9px;
-	color: #555555;
-	text-decoration: none;
-	text-align: center;
-}
-
-.font051 {
-	font-family: "宋体";
-	font-size: 12px;
-	color: #333333;
-	text-decoration: none;
-	line-height: 20px;
-}
-
-.font201 {
-	font-family: "宋体";
-	font-size: 12px;
-	color: #FF0000;
-	text-decoration: none;
-}
-
-.button {
-	font-family: "宋体";
-	font-size: 14px;
-	height: 37px;
-}
-
-html {
-	overflow-x: auto;
-	overflow-y: auto;
-	border: 0;
-}
--->
-</style>
+<script type="text/javascript">
+	function delMsg(isLeaf) {
+		if (confirm('您确定要删除此机构吗？') == false) {
+			return false;
+		} else {
+			if (isLeaf == "0") {
+				alert("非叶子节点不允许删除！");
+				return false;
+			}
+		}
+		
+		
+	}
+</script>
 </head>
 <body>
 	<form name="form1" id="form1" method="post"
@@ -101,19 +70,20 @@ html {
 			autoIncludeParameters="true">
 			<ec:row>
 				<ec:column property="NAME" title="机构名称" width="10%" />
-				<ec:column property="PARENT_UUID" title="父机构" width="10%" />
+				<ec:column property="PARENT_UUID" title="父机构" width="10%" mappingItem="parentMap"/>
 				<ec:column property="DESC1" title="机构描述" width="10%" />
-				<ec:column property="IS_LOGOUT" title="是否注销" width="10%" />
+				<ec:column property="IS_LOGOUT" title="是否注销" width="10%" mappingItem="logoutMap"/>
 				<ec:column property="LOGOUT_REASON" title="注销原因" width="10%" />
 				<ec:column property="_00" title="操作" width="10%">
-					<a href="${pageContext.request.contextPath}/admin/basic/user_showModifyPage.html?user.userCode=${user1.USER_CODE}" name="show_modify_ui">修改</a>
+					<a href="${pageContext.request.contextPath}/admin/org/org_modifyUI.html?org.uuid=${org1.UUID}" name="show_modify_ui">修改</a>
 					&nbsp;&nbsp;
-					<a href="${pageContext.request.contextPath}/admin/basic/user_showModifyPage.html?user.userCode=${user1.USER_CODE}" name="del_org">删除</a>
+					<a href="${pageContext.request.contextPath}/admin/org/org_modify.html?org.uuid=${org1.UUID}&org.isLogout=1" name="del_org" 
+					onclick="return delMsg(${org1.IS_LEAF})">删除</a>
 				</ec:column>
 			</ec:row>
 		</ec:table>
 	</div>
-	<jsp:include page="../bottom.jsp"></jsp:include>
+	<jsp:include page="../bottom.jsp"></jsp:include> 
 	
 </body>
 </html>

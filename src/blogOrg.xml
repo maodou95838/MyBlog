@@ -4,12 +4,12 @@
         "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-	<package name="orgManager" extends="struts-default" namespace="/admin/org">
-	
+
+	<package name="orgManager" extends="struts-default" namespace="/admin/org" >
 		<action name="org_*" class="cn.joymates.blog.action.org.OrgAction" method="{1}">
             <result name="home">/WEB-INF/org/org_home.jsp</result>
             <result name="addUI">/WEB-INF/org/org_add.jsp</result>
-<!--             <result name="addUI">/WEB-INF/org/org_add.jsp</result> -->
+            <result name="modifyUI">/WEB-INF/org/org_modify.jsp</result>
         </action>
         
 

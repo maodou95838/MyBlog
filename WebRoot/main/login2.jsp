@@ -34,7 +34,7 @@
 </style>
 
 <!-- 加上此段样式，它的显示格式有改变  -->
-<STYLE type=text/css>
+<STYLE type="text/css">
 BODY TD {
 	FONT-SIZE: 10pt;
 	COLOR: #333;
