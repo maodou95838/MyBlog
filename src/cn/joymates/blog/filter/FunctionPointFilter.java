@@ -40,6 +40,8 @@ public class FunctionPointFilter implements Filter {
 			arg2.doFilter(req, resp);
 			
 		} else {
+			//clear first
+			session.removeAttribute("inPageFuncList");
 			User u = new User();
 			User u1 = (User)session.getAttribute("loggedUser");
 			

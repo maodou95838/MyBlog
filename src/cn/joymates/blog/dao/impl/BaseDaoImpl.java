@@ -98,7 +98,7 @@ public class BaseDaoImpl<T extends BaseVO> implements BaseDao<T> {
 		
 		//按id排序
 		String orderBy = " ORDER BY this_." +
-				ob.getFieldMap().get(ob.getId()) + 
+				ob.getId() + 
 			    " DESC ";
 		
 		String countSql = sql.replace("*", " count(1) "); // 查询条数

@@ -24,6 +24,12 @@ public class UserAction extends BaseAction {
 		return SUCCESS;
 	}
 	
+	public String logout() {
+		session.removeAttribute("loggedUser");
+		return SUCCESS;
+	}
+
+	
 	private UserService userService = ServiceProxyFactory.getInstance(new UserService());
 	
 	private User user;

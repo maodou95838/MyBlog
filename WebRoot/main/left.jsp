@@ -65,7 +65,7 @@ body {
 								</tr>
 								<tr>
 									<td height="22" class="left-font01">[&nbsp;<a
-										href="../login.html" target="_top" class="left-font01">退出</a>&nbsp;]
+										href="${pageContext.request.contextPath}/logout.html" target="_top" class="left-font01">退出</a>&nbsp;]
 									</td>
 								</tr>
 							</table>
@@ -103,7 +103,7 @@ body {
 				<s:iterator value="#root.value" status="status2">
 					<tr>
 					  <td width="9%" height="20" ><img name="xiaotuName" id="xiaotu${status.index}${status2.index}" src="${pageContext.request.contextPath}/images/ico06.gif" width="8" height="12" /></td>
-					  <td width="91%"><a href="${pageContext.request.contextPath}/${resourceUrl}?parentId=${resourceId}tree=1" target="mainFrame" class="left-font03" onclick="tupian('${status.index}${status2.index}');">${resourceDesc}</a></td>
+					  <td width="91%"><a href="${pageContext.request.contextPath}/${resourceUrl}?parentId=${resourceId}&tree=1" target="mainFrame" class="left-font03" onclick="tupian('${status.index}${status2.index}');">${resourceDesc}</a></td>
 					</tr>
 				</s:iterator>
       	</table>

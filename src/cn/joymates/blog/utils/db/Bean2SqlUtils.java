@@ -56,7 +56,7 @@ public class Bean2SqlUtils {
 		
 		Map<String, String> vmap = getValueMap(ob);
 		sqlb.append(" and ")
-			.append(ob.getId())
+			.append("this_." + ob.getId())
 			.append("=")
 			.append(vmap.get(ob.getId()));
 		

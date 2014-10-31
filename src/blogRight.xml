@@ -7,31 +7,24 @@
 	<!-- login action -->
 	<package name="login" extends="struts-default">
 		<action name="login" class="cn.joymates.blog.action.right.UserAction" method="login">
-            <result >/main/index.jsp</result>
+            <result type="redirect">/main/index.jsp</result>
             <result name="fail">/login.jsp</result>
         </action>
         
-<!--         <action name="logout" class="cn.joymates.jxc.action.login.LoginAction" method="logout"> -->
-<!--         	<result name="logout" type="redirect">/login.jsp</result> -->
-<!--         </action> -->
+        <action name="logout" class="cn.joymates.blog.action.right.UserAction" method="logout">
+        	<result type="redirect">/login.jsp</result>
+        </action>
 
 	</package>
 	
-<!--     <package name="basic" namespace="/admin/basic" extends="struts-default"> -->
-        <!-- 角色管理 -->
-<!--         <action name="roleMgr" > -->
-<!--             <result>/WEB-INF/rightMgr/role_mgr.jsp</result> -->
-<!--         </action> -->
-        
-<!--         <action name="addRole" > -->
-<!--             <result>/WEB-INF/rightMgr/role_add.jsp</result> -->
-<!--         </action> -->
-       	
-<!--        	<action name="role_*" class="cn.joymates.jxc.action.right.RoleManagerAction" method="{1}"> -->
-<!--        		<result name="find">/WEB-INF/rightMgr/role_mgr.jsp</result> -->
-<!--        		<result name="modifyUI">/WEB-INF/rightMgr/role_modify.jsp</result> -->
-<!--        		<result name="resourceList">/WEB-INF/rightMgr/role_auth.jsp</result> -->
-<!--        	</action>  -->
+    <package name="right" namespace="/admin/right" extends="struts-default">
+       	<action name="role_*" class="cn.joymates.blog.action.right.RoleAction" method="{1}">
+       		<result name="showHomeUI">/WEB-INF/right/role_home.jsp</result>
+       		<result name="find">/WEB-INF/right/role_home.jsp</result>
+       		<result name="showAddUI">/WEB-INF/right/role_add.jsp</result>
+       		<result name="modifyUI">/WEB-INF/right/role_modify.jsp</result>
+       		<result name="modify">/WEB-INF/right/role_home.jsp</result>
+       	</action> 
 		<!-- 用户管理 -->
 <!--         <action name="userMgr" > -->
 <!--             <result>/WEB-INF/rightMgr/user_mgr.jsp</result> -->
@@ -52,6 +45,6 @@
 <!--        		<result>/WEB-INF/rightMgr/pwd_modify.jsp</result> -->
 <!--        	</action> -->
        	
-<!--     </package> -->
+    </package>
       
 </struts>
