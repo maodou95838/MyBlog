@@ -49,6 +49,7 @@ public class OrgAction extends BaseAction {
 	}
 	
 	public String add() {
+		org.setIsLogout(Org.NOT_LOGGOUT);
 		service.save(org);
 		return "home";
 	}
