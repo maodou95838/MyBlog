@@ -24,6 +24,8 @@
        		<result name="showAddUI">/WEB-INF/right/role_add.jsp</result>
        		<result name="modifyUI">/WEB-INF/right/role_modify.jsp</result>
        		<result name="modify">/WEB-INF/right/role_home.jsp</result>
+       		<result name="authUI">/WEB-INF/right/role_auth.jsp</result>
+       		<result name="auth">/WEB-INF/right/role_auth.jsp</result>
        	</action> 
 		<!-- 用户管理 -->
 <!--         <action name="userMgr" > -->

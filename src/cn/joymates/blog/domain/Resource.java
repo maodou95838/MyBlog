@@ -1,9 +1,12 @@
 package cn.joymates.blog.domain;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import cn.joymates.blog.domain.base.BaseResource;
+
+import com.google.common.collect.ImmutableMap;
 
 public class Resource extends BaseResource implements Comparable<Resource> {
 	/**
@@ -12,6 +15,14 @@ public class Resource extends BaseResource implements Comparable<Resource> {
 	public static final String TREE = "1";
 	public static final String BUTTON = "2";
 	public static final String HYPER_LINK = "3";
+	
+	public static Map<String, String> resourceTypeMap = ImmutableMap.of(
+				TREE, "树",
+				BUTTON, "按钮",
+				HYPER_LINK, "超链接"
+			);
+	
+	
 	
 	private List<Resource> childrenResouce;
 	
@@ -39,4 +50,6 @@ public class Resource extends BaseResource implements Comparable<Resource> {
 	public int hashCode() {
 		return Objects.hash(this.getResourceId());
 	}
+
+	
 }

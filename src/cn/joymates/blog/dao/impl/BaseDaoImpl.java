@@ -99,7 +99,7 @@ public class BaseDaoImpl<T extends BaseVO> implements BaseDao<T> {
 		//按id排序
 		String orderBy = " ORDER BY this_." +
 				ob.getId() + 
-			    " DESC ";
+			    " asc ";
 		
 		String countSql = sql.replace("*", " count(1) "); // 查询条数
 		String resultsql = sql + orderBy + " limit ?, ? ";// 查询语句
