@@ -13,7 +13,7 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
         FROM
             tb_user1 u LEFT JOIN tb_user_role ur 
         ON 
-        	u.user_id = ur.user_id
+        	u.user_id = ur.user_id    
         WHERE 
         	u.user_login_id = #{userLoginId} AND 
         	u.password1 = #{password1}	AND 
